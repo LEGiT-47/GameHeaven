@@ -1,0 +1,126 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #81e2ffbb; /* Light lavender background */
+    color: black;
+    padding: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(90deg, rgb(99, 0, 146),#8c52ff ); /* Gradient background in purple tones */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff !important;
+    text-transform: uppercase;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: green; /* Darker purple on hover */
+    transform: translateY(-2px);
+    border-radius: 6px;
+}
+
+/* Search Bar Styling */
+.search-container input {
+
+    padding: 8px;
+    border-radius: 100px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #7b1fa2; /* Purple border on focus */
+    outline: none;
+}
+
+/* Main Content Styles */
+h1 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #6a1b9a; /* Deep purple for headings */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Gift List Styling */
+.gift-item {
+    background-color: #f4eaf6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gift-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gift-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.gift-item h3 {
+    font-size: 20px;
+    color: #6a1b9a; /* Purple for gift titles */
+    margin-bottom: 10px;
+}
+
+.gift-item p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.gift-item p strong {
+    font-size: 16px;
+    color: #ab47bc; /* Lavender tone for price */
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(90deg, #8e24aa, #ab47bc); /* Lavender gradient for buttons */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #8e24aa; /* Darker purple on hover */
+    transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 24px;
+    }
+
+    .gift-item {
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,62 @@
+/* html,
+body {
+  height: 100%;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+} */
+
+body {
+    background-image: url(ab6.png); /* Replace with your gaming image path */
+    background-size: cover; /* Cover the entire body */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; /* Fix the background during scrolling */
+    color: white;
+    
+}
+.container {
+    position: relative;
+    z-index: 2;
+}
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent; /* Dark overlay for better text visibility */
+    z-index: 1;
+    color:aqua;
+}
+.content {
+    position: relative;
+    z-index: 2;
+    margin-top: 50px;
+}
+.card {
+    background-color: rgba(0, 0, 0, 0.4); /* Card background with transparency */
+    border-radius: 50px;
+    color:aliceblue;
+}
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}

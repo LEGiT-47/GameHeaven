@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHeaven - My Cart</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles1.css' %}">
+    
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+        
+        <a class="navbar-brand" href="#">GameHeaven</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">My Cart</a>
+                </li>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="display-4 text-center my-5">My Cart</h1>
+        <table class="table" id="cartTable">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be dynamically populated here -->
+            </tbody>
+        </table>
+        <a href=".."><button  class="btn btn-primary" id="checkoutButton">Checkout</button></a>
+        {% csrf_token %}
+       
+    </div>
+
+    <script>
+        // Load cart from localStorage and display in the table
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartTableBody = document.querySelector('#cartTable tbody');
+            cartTableBody.innerHTML = '';  // Clear table first
+
+            if (cart.length === 0) {
+                cartTableBody.innerHTML = '<tr><td colspan="5" class="text-center">Your cart is empty!</td></tr>';
+                document.getElementById('checkoutButton').disabled = true;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                let total = item.price * item.quantity;
+                cartTableBody.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>₹${item.price}</td>
+                        <td>₹${total}</td>
+                        <td><button class="btn btn-danger" onclick="removeFromCart(${index})">Remove</button></td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('checkoutButton').disabled = false;
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);  // Remove item by index
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();  // Reload cart after removing
+        }
+        document.getElementById('checkoutButton').addEventListener('click', function() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            fetch('/checkout/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token for security
+                },
+                body: JSON.stringify(cart)
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        });
+        
+        
+
+        // Initialize cart on page load
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
