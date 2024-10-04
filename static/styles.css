@@ -13,8 +13,9 @@ h3{
 }
 h5{
   font-family: 'MV Boli', cursive, sans-serif;
-  font-size: x-large;
+  font-size: xx-large;
   color: black;
+  font-weight: bold;
 }
 *{
   font-family: 'Roboto', sans-serif;
@@ -646,13 +647,16 @@ section{
 /* contact */
 
 .contact{
-  background: url(blackwall.jpg);
+  /* background: url(blackwall.jpg); */
+  background: transparent;
 }
 
 .contact .row{
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
+  background: #be81ffbb;
+  border-radius: 20px;
 }
 
 .contact .row .image{
@@ -886,4 +890,24 @@ strong{
 
 .middle-nav a:hover {
   background-color: #575757; /* Darker background on hover */
+}
+
+.alert {
+  padding: 10px;
+  margin-top: 80px; 
+  border-radius: 5px;
+  z-index: 1000; /* Ensure the alert is above other elements */
+  
+  text-align: center;
+  font-size: medium;
+}
+
+.alert-success {
+  background-color: #45ffd0;
+  color: #155724;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
 }

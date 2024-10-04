@@ -13,10 +13,14 @@ import json
 def home(request):
     if request.user.is_anonymous:
           return redirect('login/')
-    return render(request, 'about.html')
+    messages.success(request, 'Welcome!')
+    return render(request, 'home.html')
 
 def homeret():
      return redirect("home")
+
+def about(request):
+     return render(request, 'about.html')
 
 def products(request):
     if request.user.is_anonymous:
@@ -45,11 +49,12 @@ def loginUser(request):
         if user is not None:
                  # A backend authenticated the credentials
                  login(request,user)
+                 
                  return redirect('home')
     
         else:
                   # No backend authenticated the credentials
-                  
+                  messages.error(request, 'Invalid username or password')
                   return render(request,'login.html')
 
         
