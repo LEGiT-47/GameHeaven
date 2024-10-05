@@ -1,0 +1,22 @@
+
+.boxer{
+    display: flex;
+}
+.box1{
+    display: grid;
+}
+.name{
+    padding-left: 30px;
+    background-color: #c040f7bb;
+    display: flex;
+    gap:550px;
+
+}
+body{
+    background-color: #81e2ffbb;
+}
+img{
+    border: 5px solid #c040f7;
+    border-radius: 10px;
+}
+

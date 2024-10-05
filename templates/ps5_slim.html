@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styling.css'%}" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    
+    <div class="name">
+        <h1 ><a href="javascript:void(0);" onclick="goBack()"><i class="fas fa-chevron-circle-left"></i></a></h1>
+         <h1 >PS 5 SLIM VERSION</h1>
+    </div>
+    <hr>
+    <hr>
+    <div class="boxer">
+      <div class="containering" style="width: 1100px;">
+        <p>
+          <strong><h2>About this item</h2></strong>
+          <li>
+            <b>Slim Design:</b> With PS5, players get powerful gaming technology
+            packed inside a sleek and compact console design.
+          </li>
+          <br />
+          <li>
+            <b>1TB of Storage:</b>Keep your favorite games ready and waiting for
+            you to jump in and play with 1TB of SSD storage built in.
+          </li>
+          <br />
+          <li>
+            <b>Ultra-High Speed SSD:</b> Maximize your play sessions with near
+            instant load times for installed PS5 games.
+          </li>
+          <br />
+          <li>
+            <b>Integrated I/O:</b> The custom integration of the PS5 console's
+            systems lets creators pull data from the SSD so quickly that they
+            can design games in ways never before possible.
+          </li>
+          <br />
+          <li>
+            <b>Ray Tracing:</b> Immerse yourself in worlds with a new level of
+            realism as rays of light are individually simulated, creating
+            true-to-life shadows and reflections in supported PS5 games.
+          </li>
+          <br />
+          <li>
+            <b>4K-TV Gaming:</b> your favorite PS5 games on your stunning 4K TV.
+          </li>
+          <br />
+          <li>
+            <b>Up to 120fps with 120Hz output:</b> Enjoy smooth and fluid high
+            frame rate gameplay at up to 120fps for compatible games, with
+            support for 120Hz output on 4K displays.
+          </li>
+          <br />
+          <li>
+            <b>HDR Technology:</b> With an HDR TV, supported PS5 games display
+            an unbelievably vibrant and lifelike range of colors.
+          </li>
+          <br />
+          <li>
+            <b>Tempest 3D AudioTech:</b> Immerse yourself in soundscapes where
+            it feels as if the sound comes from every direction. Your
+            surroundings truly come alive with Tempest 3D AudioTech in supported
+            games.
+          </li>
+          <br />
+          <li>
+            <b>Haptic Feedback:</b> Experience haptic feedback via the DualSense
+            wireless controller in select PS5 titles and feel the effects and
+            impact of your in-game actions through dynamic sensory feedback.
+          </li>
+          <br />
+          <li>
+            <b> Adaptive Triggers:</b> Get to grips with immersive adaptive
+            triggers, featuring dynamic resistance levels which simulate the
+            physical impact of in-game activities in select PS5 games.
+          </li>
+          <br />
+          <li>
+            <b>Includes ASTRO’S:</b> Playroom Explore four worlds, each one
+            showcasing innovative gameplay using the versatile features of the
+            DualSense wireless controller, in this game included for all PS5
+            console users.
+          </li>
+        </p>
+        <br />
+      </div>
+      <div class="box1">
+      <div class="containering">
+        <img src="{% static 'ps5_slim1.jpg'%}" style="height: 350px; width: 350px;" />
+      </div>
+      <div class="containering">
+        <img src="{% static 'ps5_slim2.jpg'%}"  style="height: 350px; width: 350px;"/>
+      </div>
+      </div>
+    </div>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+      </script>
+  </body>
+</html>

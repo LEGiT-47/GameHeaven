@@ -27,6 +27,9 @@ def products(request):
          return redirect('login')
     return render(request, 'products.html')
 
+def slim(request):
+     return render(request,'ps5_slim.html')
+
 def mycart(request):
     return render(request, 'mycart.html')
 
