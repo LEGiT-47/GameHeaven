@@ -31,8 +31,13 @@ def products(request):
     return render(request, 'products.html')
 
 
-def slim(request):
-     return render(request,'ps5_slim.html')
+def item_detail(request):
+    item_name = request.GET.get('name')  # Get the item name from query parameters
+    
+    context = {
+        'item_name': item_name,
+    }
+    return render(request, 'ps5_slim.html',context)
 
 def mycart(request):
     return render(request, 'mycart.html')
