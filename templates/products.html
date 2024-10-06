@@ -34,10 +34,7 @@
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'home' %}#review">Reviews</a>
             <a href="{% url 'about' %}#contact">Contact</a>
-            <div class="search-container ml-auto">
-                <input type="text" id="searchInput" placeholder="Search For Products" onkeyup="searchItems()">
-            </div>
-            
+            <a href="{% url 'search' %}">Search</a>
         </nav>
     
         <div class="icons">
@@ -852,21 +849,7 @@
         });
     });
 
-    // Search function to filter gifts
-    function searchItems() {
-        const searchValue = document.getElementById('searchInput').value.toLowerCase();
-        const Itemsre = document.querySelectorAll('.content');
-
-        Itemsre.forEach(function(itemre) {
-            const itemName = itemre.querySelector('h3').innerText.toLowerCase();
-            if (itemName.includes(searchValue)) {
-                itemre.parentElement.style.display = 'block';
-            } else {
-                itemre.parentElement.style.display = 'none';
-            }
-        });
-    }
-
+   
     document.getElementById("Icon").addEventListener("click", function() {
         if (this.style.color = "red"){
                   this.style.color="white";}

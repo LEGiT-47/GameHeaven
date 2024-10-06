@@ -1,0 +1,793 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- Link your styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Search Results</title>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-gamepad"></i> GameHeaven </a>
+    
+        <nav class="navbar">
+            <a href="{% url 'home' %}">Home</a>
+            <div class="dropdown">
+                <a href="{% url 'products' %}" class="dropbtn">Products<i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#ps_consoles" class="active">PS Consoles</a>
+                    <a href="#xbox_consoles">XBOX Consoles</a>
+                    <a href="#nintendo">Nintendo Switches</a>
+                    <a href="#gamepads">Gamepads</a>
+                    <a href="#keyboards">Keyboards</a>
+                    <a href="#headphones">Headphones</a>
+                </div>
+            </div>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'home' %}#review">Reviews</a>
+            <a href="{% url 'about' %}#contact">Contact</a>
+            <div class="search-container ml-auto">
+                <input type="text" id="search-input" placeholder="Search For Products" onkeyup="searchProducts()">
+            </div>
+            
+        </nav>
+    
+        <div class="icons">
+            <a href="{% url 'mycart' %}">
+                <div id="cart-btn" class="fas fa-shopping-basket"></div>
+            </a>
+            <a href="{% url 'logout' %}">
+                <div id="login-btn" class="fas fa-sign-out-alt"></div>
+            </a>
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+    </header> 
+
+    <p class="nope" id="no-products-message" style="display: none;">No products found</p>
+
+<section class="product" id="product">
+    <div class="box-container" id="search-results" style="padding-top:100px;">
+        <!-- Products will be loaded here based on search query -->
+        <div class="box" data-name="ps 5 pro version">
+            <div class="image">
+                <img src="{% static 'ps_5_pro.png'%}" alt="" >
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS 5 Pro Version</h3>
+                <div class="price">₹ 57,999</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS 5 Pro Version" data-price="57999">ADD</button>
+                <i class="fas fa-heart"  id="Icon"></i>
+                <i class="fas fa-eye"  id="Icon"></i>
+            </div>
+        </div>
+
+        <div class="box" data-name="ps 5 slim version">
+            <div class="image">
+                <img src="{% static 'ps5_slim.png'%}" alt="">
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS-5 Slim Version</h3>
+                <div class="price">₹ 54,990</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS-5 Slim Version" data-price="54990">ADD</button>
+                <i class="fas fa-heart" id="Icon"></i>
+                <a href="{% url  'slim'%} "><i class="fas fa-eye" id="Icon"></i></a>
+            </div>
+        </div>
+
+        <div class="box" data-name="ps 5 normal version">
+            <div class="image">
+                <img src="{% static 'ps5_norm.png'%}" alt="">
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS-5 Original Version</h3>
+                <div class="price">₹ 45,999</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS-5 Original Version" data-price="45999">ADD</button>
+                <i class="fas fa-heart" id="Icon"></i>
+                <i class="fas fa-eye" id="Icon"></i>
+            </div>
+        </div>
+
+        <div class="box" data-name="ps 4 pro version">
+            <div class="image">
+                <img src="{% static 'ps_4_pro.png'%}" alt="">
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS 4 Pro Version</h3>
+                <div class="price">₹ 35,999</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS 4 Pro Version" data-price="35999">ADD</button>
+                <i class="fas fa-heart" id="Icon"></i>
+                <i class="fas fa-eye" id="Icon"></i>
+            </div>
+        </div>
+
+        <div class="box" data-name="ps 4 slim version">
+            <div class="image">
+                <img src="{% static 'ps_4_slim.png'%}" alt="">
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS 4 Slim Version</h3>
+                <div class="price">₹ 30,999</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS 4 Slim Version" data-price="30999">ADD</button>
+                <i class="fas fa-heart" id="Icon"></i>
+                <i class="fas fa-eye" id="Icon"></i>
+            </div>
+        </div>
+
+        <div class="box" data-name="ps 4 normal version">
+            <div class="image">
+                <img src="{% static 'ps_4_norm.png'%}" alt="">
+            </div>
+            <div class="content">
+                <br><br>
+                <h3>PS 4 Normal Version</h3>
+                <div class="price">₹ 26,999</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <button class="btn btn-primary add" data-name="PS 4 Normal Version" data-price="26999">ADD</button>
+                <i class="fas fa-heart" id="Icon"></i>
+                <i class="fas fa-eye" id="Icon"></i>
+            </div>
+        </div>
+
+    <div class="box" data-name="xbox series x">
+        <div class="image">
+            <img src="{% static 'xbox_series_x.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>XBOX Series X </h3>
+            <div class="price">₹ 57,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="XBOX Series X" data-price="57999">ADD</button>
+            <i class="fas fa-heart"  id="Icon"></i>
+            <i class="fas fa-eye"  id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="xbox 360">
+        <div class="image">
+            <img src="{% static 'xbox_360.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>XBOX 360</h3>
+            <div class="price">₹ 54,990</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="XBOX 360" data-price="54900">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="xbox 360 slim version">
+        <div class="image">
+            <img src="{% static 'xbox_360_slim.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>XBOX-360 Slim Ver</h3>
+            <div class="price">₹ 50,990</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="XBOX 360 Slim Version" data-price="50990">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="xbox one x version">
+        <div class="image">
+            <img src="{% static 'xbox_one_x.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>XBOX One X Version</h3>
+            <div class="price">₹ 35,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="XBOX One X Version" data-price="35999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="xbox series s bundle">
+        <div class="image">
+            <img src="{% static 'xbox_series_s.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>XBOX Series S Bundle</h3>
+            <div class="price">₹ 30,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="XBOX Series S Bundle" data-price="30999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="new horizons skin">
+        <div class="image">
+            <img src="{% static 'new_horizons.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>New Horizons Skin</h3>
+            <div class="price">₹ 40000</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="New Horizons Skin" data-price="40000">ADD</button>
+            <i class="fas fa-heart"  id="Icon"></i>
+            <i class="fas fa-eye"  id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="dialga & palkia skin">
+        <div class="image">
+            <img src="{% static 'dialga_palkia.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Dialga & Palkia Skin</h3>
+            <div class="price">₹ 40000</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Dialga & Palkia Skin" data-price="40000">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="nintendo labo">
+        <div class="image">
+            <img src="{% static 'labo.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Nintendo Labo</h3>
+            <div class="price">₹ 45,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Nintendo Labo" data-price="45999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="hyrule edition lite">
+        <div class="image">
+            <img src="{% static 'hyrule_edition.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Hyrule Edition Lite</h3>
+            <div class="price">₹ 35,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Hyrule Edition Lite" data-price="35999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="super smash bros ult.">
+        <div class="image">
+            <img src="{% static 'super_smash.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Super-Smash-Bros Ult.</h3>
+            <div class="price">₹ 40,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Super Smash Bros Ultimate" data-price="40999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+    <div class="box" data-name="cosmic byte c3070w">
+        <div class="image">
+            <img src="{% static 'cosmic_c3070.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Cosmic Byte C3070W </h3>
+            <div class="price">₹ 17,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Cosmic Byte C3070W " data-price="17999">ADD</button>
+            <i class="fas fa-heart"  id="Icon"></i>
+            <i class="fas fa-eye"  id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="claw shoot wired">
+        <div class="image">
+            <img src="{% static 'claw_shoot.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>CLAW Shoot Wired</h3>
+            <div class="price">₹ 14,990</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="CLAW Shoot Wired" data-price="14900">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="easysmx wireless">
+        <div class="image">
+            <img src="{% static 'easysmx.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>EasySMX Wireless</h3>
+            <div class="price">₹ 15,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="EasySMX Wireless" data-price="15999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="sbox elite series 2">
+        <div class="image">
+            <img src="{% static 'xbox_elite.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Xbox Elite Series-2</h3>
+            <div class="price">₹ 35,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Xbox Elite Series-2" data-price="35999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="logitech g f710">
+        <div class="image">
+            <img src="{% static 'logitech.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Logitech G F710</h3>
+            <div class="price">₹ 20,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Logitech G F710" data-price="20999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+        
+    <div class="box" data-name="xspark keyboard">
+        <div class="image">
+            <img src="{% static 'xspark.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Xspark Keyboard</h3>
+            <div class="price">₹ 2,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Xspark Keyboard" data-price="2999">ADD</button>
+            <i class="fas fa-heart"  id="Icon"></i>
+            <i class="fas fa-eye"  id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="zebronics optimus">
+        <div class="image">
+            <img src="{% static 'zebronics.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>ZEBRONICS OPTIMUS </h3>
+            <div class="price">₹ 1,990</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="ZEBRONICS OPTIMUS " data-price="1900">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="arch keyboard">
+        <div class="image">
+            <img src="{% static 'arch.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Arch Keyboard</h3>
+            <div class="price">₹ 1,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Arch Keyboard" data-price="1999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="hyperx allow core">
+        <div class="image">
+            <img src="{% static 'hyperx.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>HyperX Alloy Core</h3>
+            <div class="price">₹ 1,599</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="HyperX Alloy Core" data-price="1599">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="xasus keyboard">
+        <div class="image">
+            <img src="{% static 'asuskey.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Asus Keyboard</h3>
+            <div class="price">₹ 1,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Asus Keyboards" data-price="1999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+    <div class="box" data-name="razor blackshark set">
+        <div class="image">
+            <img src="{% static 'razor.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Razor Blackshark Set</h3>
+            <div class="price">₹ 7,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Razor Blackshark Headset" data-price="7999">ADD</button>
+            <i class="fas fa-heart"  id="Icon"></i>
+            <i class="fas fa-eye"  id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="asus rog headset">
+        <div class="image">
+            <img src="{% static 'asus.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Asus Rog Headset</h3>
+            <div class="price">₹ 14,990</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Asus Rog Headset" data-price="14900">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="boat 518 headphones">
+        <div class="image">
+            <img src="{% static 'boat.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Boat 518 Headphones</h3>
+            <div class="price">₹ 10,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Boat 518 Headphones" data-price="10999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="bengoo g900 headset"> 
+        <div class="image">
+            <img src="{% static 'bengoo.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Bengoo G900 Headset</h3>
+            <div class="price">₹ 9,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Bengoo G900 Headset" data-price="9999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="ozeino gaming set">
+        <div class="image">
+            <img src="{% static 'ozeino.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Ozeino Gaming Set</h3>
+            <div class="price">₹ 10,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="OZEINO GAMING HEADSET" data-price="10999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+
+    <div class="box" data-name="zeb jet pro headset"> 
+        <div class="image">
+            <img src="{% static 'zeb_jet.png'%}" alt="">
+        </div>
+        <div class="content">
+            <br><br>
+            <h3>Zeb Jet Pro Headset</h3>
+            <div class="price">₹ 13,999</div>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <button class="btn btn-primary add" data-name="Zeb Jet Pro Headset" data-price="13999">ADD</button>
+            <i class="fas fa-heart" id="Icon"></i>
+            <i class="fas fa-eye" id="Icon"></i>
+        </div>
+    </div>
+</div>
+</section>
+
+<script>
+    function searchProducts() {
+        // Get the search input value
+        let input = document.getElementById('search-input').value.toLowerCase();
+        
+        // Get all the product containers (boxes)
+        let products = document.querySelectorAll('.box');
+        let anyProductVisible = false;
+        // Loop through the product containers and show/hide based on the search
+        products.forEach(function(product) {
+            // Get the product name from the data attribute
+            let productName = product.getAttribute('data-name').toLowerCase();
+            
+            // Check if the product name includes the search query
+            if (productName.includes(input)) {
+                product.style.display = 'block';// Show the product box if it matches
+                anyProductVisible = true;   
+            } else {
+                product.style.display = 'none';  // Hide the product box if it doesn't match
+            }
+        });
+        let noProductsMessage = document.getElementById('no-products-message');
+        if (anyProductVisible) {
+            noProductsMessage.style.display = 'none';  // Hide the message if products are found
+        } else {
+            noProductsMessage.style.display = 'block';  // Show the message if no products match
+        }
+    }
+
+    // Function to add items to localStorage as the cart
+    function addToCart(item) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let existingItem = cart.find(cartItem => cartItem.name === item.name);
+
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push(item);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${item.name} has been added to your cart!`);
+    }
+
+    // Event listener to "Add to Cart" buttons
+    document.querySelectorAll('.add').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemName = this.getAttribute('data-name');
+            const itemPrice = this.getAttribute('data-price');
+            const item = { name: itemName, price: itemPrice, quantity: 1 };
+            addToCart(item);
+        });
+    });
+
+   
+    document.getElementById("Icon").addEventListener("click", function() {
+        if (this.style.color = "red"){
+                  this.style.color="white";}
+        else{
+        this.style.color="red";
+        this.style.background = "pink";
+        this.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";}
+      });
+    
+</script>
+
+</body>
+</html>

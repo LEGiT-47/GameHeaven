@@ -21,4 +21,5 @@ urlpatterns = [
     path('products/',views.products,name="products"),
     path('homeret/',views.homeret,name="homeret"),
     path('slim/',views.slim,name="slim"),
+    path('search/',views.search,name="search"),
 ]

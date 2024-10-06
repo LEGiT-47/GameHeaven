@@ -22,10 +22,14 @@ def homeret():
 def about(request):
      return render(request, 'about.html')
 
+def search(request):
+     return render(request,'serach_res.html')
+
 def products(request):
     if request.user.is_anonymous:
          return redirect('login')
     return render(request, 'products.html')
+
 
 def slim(request):
      return render(request,'ps5_slim.html')
