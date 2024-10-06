@@ -37,7 +37,7 @@ def item_detail(request):
     context = {
         'item_name': item_name,
     }
-    return render(request, 'ps5_slim.html',context)
+    return render(request, 'itemdes.html',context)
 
 def mycart(request):
     return render(request, 'mycart.html')
