@@ -9,12 +9,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .forms import ContactForm
+from django.utils.timezone import now
 
 def home(request):
     if request.user.is_anonymous:
           return redirect('login/')
     messages.success(request, 'Welcome!')
-    return render(request, 'home.html')
+    reviews = Contact.objects.all()
+    return render(request, 'home.html' , {'reviews': reviews})
 
 def homeret():
      return redirect("home")
@@ -79,17 +82,23 @@ def logoutUser(request):
     return redirect("login") 
 
 
-
 def contact(request):
     if request.method == "POST":
-        name=request.POST.get('name')
-        email=request.POST.get('email')
-        phone=request.POST.get('phone')
-        desc=request.POST.get('desc')
-        contact=Contact(name=name,email=email,phone=phone,desc=desc,date=datetime.today())
-        contact.save()
-        messages.success(request, "YOUR MESSAGE HAS BEEN SENT.")
-    return redirect(about)
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Automatically save the data to the model, including the rating
+            contact = form.save(commit=False)
+            contact.date = now()
+            contact.save()
+            messages.success(request, "Your message has been sent.")
+            return redirect('about') 
+        else:
+            messages.error(request, "There was an error with your form submission.")
+    else:
+        form = ContactForm()
+    
+    # Pass the form to the template for rendering
+    return render(request, 'about', {'form': form})
 
 def register_view(request):
     if request.method == "POST":
@@ -120,6 +129,8 @@ def checkout(request):
         )
         cart.save()
 
-    return JsonResponse({'message': 'Cart items saved successfully'})
+    messages.success(request, 'Checkout Completed Successfully !') 
+
+    return  JsonResponse({'success': True, 'message': 'Checkout completed successfully'})
 
    

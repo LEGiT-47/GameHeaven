@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Contact(models.Model):
     name=models.CharField(max_length=122)
+    rating = models.FloatField(default=0.0)
     email=models.CharField(max_length=122)
     phone=models.CharField(max_length=12)
     desc=models.TextField()

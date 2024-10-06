@@ -13,18 +13,24 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="gap: 2rem; border-radius: 20px;">
         
-        
-        <a class="navbar-brand" href="#">GameHeaven</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+        <a href="#" class="navbar-brand"> <i class="fas fa-gamepad" style="color:#ffba43;"></i> GameHeaven </a> 
+        <div class="collapse navbar-collapse" >
+            <ul class="navbar-nav mr-auto" style="gap: 2rem;">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">My Cart</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'search' %}">Search</a>
+                </li>
+                
         </div>
     </nav>
     <div class="container">
@@ -86,6 +92,8 @@
         }
         document.getElementById('checkoutButton').addEventListener('click', function() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Send cart data to server via POST request
             fetch('/checkout/', {
                 method: 'POST',
                 headers: {
@@ -95,8 +103,26 @@
                 body: JSON.stringify(cart)
             })
             .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
+            .then(data => {
+                console.log(data);
+        
+                // If the checkout is successful, clear the cart and update the table
+                if (data.success) {
+                    localStorage.removeItem('cart');  // Clear cart from localStorage
+                    
+                    let cartTableBody = document.querySelector('#cartTable tbody');
+                    cartTableBody.innerHTML = '';  // Clear the cart table in HTML
+                    cartTableBody.innerHTML = '<tr><td colspan="5" class="text-center">Your cart is empty!</td></tr>';  // Show empty message
+                    
+                    document.getElementById('checkoutButton').disabled = true;  // Disable checkout button
+                } else {
+                    alert("Checkout failed. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Error processing checkout.");
+            });
         });
         
         

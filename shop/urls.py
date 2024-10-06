@@ -22,4 +22,5 @@ urlpatterns = [
     path('homeret/',views.homeret,name="homeret"),
     path('search/',views.search,name="search"),
     path('item-detail/', views.item_detail, name='item_detail'),
+
 ]
