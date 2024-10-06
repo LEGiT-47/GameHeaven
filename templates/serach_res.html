@@ -36,10 +36,10 @@
         </nav>
     
         <div class="icons">
-            <a href="{% url 'mycart' %}">
+            <a href="{% url 'mycart' %}" title="Cart"> 
                 <div id="cart-btn" class="fas fa-shopping-basket"></div>
             </a>
-            <a href="{% url 'logout' %}">
+            <a href="{% url 'logout' %}" title="Logout">
                 <div id="login-btn" class="fas fa-sign-out-alt"></div>
             </a>
             <div id="menu-btn" class="fas fa-bars"></div>
@@ -68,7 +68,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS 5 Pro Version" data-price="57999">ADD</button>
                 <i class="fas fa-heart"  id="Icon"></i>
-                <i class="fas fa-eye"  id="Icon"></i>
+                <a href="{% url 'item_detail' %}?name=PS-5%20Pro%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -89,7 +89,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS-5 Slim Version" data-price="54990">ADD</button>
                 <i class="fas fa-heart" id="Icon"></i>
-                <a href="{% url  'slim'%} "><i class="fas fa-eye" id="Icon"></i></a>
+                <a href="{% url 'item_detail' %}?name=PS-5%20Slim%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -110,7 +110,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS-5 Original Version" data-price="45999">ADD</button>
                 <i class="fas fa-heart" id="Icon"></i>
-                <i class="fas fa-eye" id="Icon"></i>
+                <a href="{% url 'item_detail' %}?name=PS-5%20Normal%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -131,7 +131,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS 4 Pro Version" data-price="35999">ADD</button>
                 <i class="fas fa-heart" id="Icon"></i>
-                <i class="fas fa-eye" id="Icon"></i>
+                <a href="{% url 'item_detail' %}?name=PS-4%20Pro%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -152,7 +152,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS 4 Slim Version" data-price="30999">ADD</button>
                 <i class="fas fa-heart" id="Icon"></i>
-                <i class="fas fa-eye" id="Icon"></i>
+                <a href="{% url 'item_detail' %}?name=PS-4%20Slim%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -173,7 +173,7 @@
                 </div>
                 <button class="btn btn-primary add" data-name="PS 4 Normal Version" data-price="26999">ADD</button>
                 <i class="fas fa-heart" id="Icon"></i>
-                <i class="fas fa-eye" id="Icon"></i>
+                <a href="{% url 'item_detail' %}?name=PS-4%20Normal%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
         </div>
 
@@ -194,7 +194,7 @@
             </div>
             <button class="btn btn-primary add" data-name="XBOX Series X" data-price="57999">ADD</button>
             <i class="fas fa-heart"  id="Icon"></i>
-            <i class="fas fa-eye"  id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX%20Series%20X"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -215,7 +215,7 @@
             </div>
             <button class="btn btn-primary add" data-name="XBOX 360" data-price="54900">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX-360"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -236,7 +236,7 @@
             </div>
             <button class="btn btn-primary add" data-name="XBOX 360 Slim Version" data-price="50990">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX-360%20Slim%20Version"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -257,7 +257,7 @@
             </div>
             <button class="btn btn-primary add" data-name="XBOX One X Version" data-price="35999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX%20One%20X%20Version"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -278,7 +278,7 @@
             </div>
             <button class="btn btn-primary add" data-name="XBOX Series S Bundle" data-price="30999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX%20Series%20S%20Bundle"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -299,7 +299,7 @@
             </div>
             <button class="btn btn-primary add" data-name="New Horizons Skin" data-price="40000">ADD</button>
             <i class="fas fa-heart"  id="Icon"></i>
-            <i class="fas fa-eye"  id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=New%20Horizons%20Skin"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -320,7 +320,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Dialga & Palkia Skin" data-price="40000">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Dialga%20and%20Palkia%20Skin"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -341,7 +341,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Nintendo Labo" data-price="45999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Nintendo%20Labo"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -362,7 +362,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Hyrule Edition Lite" data-price="35999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Hyrule%20Edition%20Lite"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -383,7 +383,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Super Smash Bros Ultimate" data-price="40999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Super-Smash-Bros%20Ult."><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
     <div class="box" data-name="cosmic byte c3070w">
@@ -403,7 +403,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Cosmic Byte C3070W " data-price="17999">ADD</button>
             <i class="fas fa-heart"  id="Icon"></i>
-            <i class="fas fa-eye"  id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Cosmic%20Byte%20C3070W"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -424,7 +424,7 @@
             </div>
             <button class="btn btn-primary add" data-name="CLAW Shoot Wired" data-price="14900">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Claw%20Shoot%20Wired"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -445,11 +445,11 @@
             </div>
             <button class="btn btn-primary add" data-name="EasySMX Wireless" data-price="15999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=EasySMX%20Wireless"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
-    <div class="box" data-name="sbox elite series 2">
+    <div class="box" data-name="xbox elite series 2">
         <div class="image">
             <img src="{% static 'xbox_elite.png'%}" alt="">
         </div>
@@ -466,7 +466,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Xbox Elite Series-2" data-price="35999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=XBOX%20Elite%20Series-2"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -487,7 +487,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Logitech G F710" data-price="20999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Logitech%20G%20F710"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
         
@@ -508,7 +508,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Xspark Keyboard" data-price="2999">ADD</button>
             <i class="fas fa-heart"  id="Icon"></i>
-            <i class="fas fa-eye"  id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Xspark%20Keyboard"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -529,7 +529,7 @@
             </div>
             <button class="btn btn-primary add" data-name="ZEBRONICS OPTIMUS " data-price="1900">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=ZEBRONICS%20OPTIMUS"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -550,7 +550,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Arch Keyboard" data-price="1999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Arch%20Keyboard"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -571,7 +571,7 @@
             </div>
             <button class="btn btn-primary add" data-name="HyperX Alloy Core" data-price="1599">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=HyperX%20Alloy%20Core"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -592,7 +592,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Asus Keyboards" data-price="1999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Asus%20Keyboard"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
     <div class="box" data-name="razor blackshark set">
@@ -612,7 +612,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Razor Blackshark Headset" data-price="7999">ADD</button>
             <i class="fas fa-heart"  id="Icon"></i>
-            <i class="fas fa-eye"  id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Razor%20Blackshark%20HeadSet"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -633,7 +633,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Asus Rog Headset" data-price="14900">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Asus%20Rog%20Headset"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -654,7 +654,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Boat 518 Headphones" data-price="10999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Boat-518%20Headphones"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -675,7 +675,7 @@
             </div>
             <button class="btn btn-primary add" data-name="Bengoo G900 Headset" data-price="9999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Bengoo%20G900%20Headset"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -696,7 +696,7 @@
             </div>
             <button class="btn btn-primary add" data-name="OZEINO GAMING HEADSET" data-price="10999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Ozeino%20Gaming%20Set"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 
@@ -717,10 +717,11 @@
             </div>
             <button class="btn btn-primary add" data-name="Zeb Jet Pro Headset" data-price="13999">ADD</button>
             <i class="fas fa-heart" id="Icon"></i>
-            <i class="fas fa-eye" id="Icon"></i>
+            <a href="{% url 'item_detail' %}?name=Zeb%20Jet%20Pro%20Headset"><i class="fas fa-eye" id="Icon"></i></a>
         </div>
     </div>
 </div>
+
 </section>
 
 <script>
