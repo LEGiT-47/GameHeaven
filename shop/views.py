@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import JsonResponse
-from shop.models import  Contact,Cart
+from shop.models import  Contact,Cart, Order, CartItem,Product
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
@@ -10,7 +10,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .forms import ContactForm
-from django.utils.timezone import now
+from django.urls import reverse
 
 def home(request):
     if request.user.is_anonymous:
@@ -45,16 +45,37 @@ def item_detail(request):
 def mycart(request):
     return render(request, 'mycart.html')
 
+def my_cart(request):
+    if request.user.is_authenticated:
+        cart_items = Cart.objects.filter(user=request.user)
+        total_price = sum(item.price * item.quantity for item in cart_items)
+        return render(request, 'mycart.html', {'cart_items': cart_items, 'total_price': total_price , 'id': cart_items.id})
+    else:
+        return redirect('login')
+
 def add(request, product_id):
-    product = get_object_or_404(product, id=product_id)
-    # Try to find if the product is already in the cart
-    cart_item, created = Cart.objects.get_or_create(product=product) # type: ignore
+    if request.method == 'POST':
+        # Ensure product exists in the database
+        product = get_object_or_404(Product, id=product_id)
+        quantity = int(request.POST.get('quantity', 1))  # Get quantity, default to 1
+        user = request.user  # Get logged-in user
+        fixed_id = f"{product.id}"
+        # Create or update the cart item for the user, linking it to the correct product
+        cart_item, created = Cart.objects.get_or_create(
+            user=user,
+            name=product.name,
+            product=product,
+            fixed_id=fixed_id,  # Pass the product here
+            defaults={'price': product.price, 'quantity': quantity}
+        )
 
-    if not created:
-        cart_item.quantity += 1  # Update the quantity if already exists
-    cart_item.save()
+        # If the item already exists, just update the quantity
+        if not created:
+            cart_item.quantity += quantity
+            cart_item.save()
 
-    return redirect('cart_view')
+        return JsonResponse({'success': True, 'message': 'Product added to cart'})
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
 
 def loginUser(request):
     if request.method=="POST":
@@ -72,33 +93,36 @@ def loginUser(request):
                   messages.error(request, 'Invalid username or password')
                   return render(request,'login.html')
 
-        
-
-
     return render(request,'login.html')
+
 
 def logoutUser(request):
     logout(request)
     return redirect("login") 
 
 
+# def contact(request):
+#     if request.method == "POST":
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             # Automatically save the data to the model, including the rating
+#             contact = form.save(commit=False)
+#             contact.date = now()
+#             contact.save()
+#             messages.success(request, "Your message has been sent.")
+#     return redirect("about") 
+
 def contact(request):
     if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Automatically save the data to the model, including the rating
-            contact = form.save(commit=False)
-            contact.date = now()
-            contact.save()
-            messages.success(request, "Your message has been sent.")
-            return redirect('about') 
-        else:
-            messages.error(request, "There was an error with your form submission.")
-    else:
-        form = ContactForm()
-    
-    # Pass the form to the template for rendering
-    return render(request, 'about', {'form': form})
+        name=request.POST.get('name')
+        rating=request.POST.get('rating')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        desc=request.POST.get('desc')
+        contact=Contact(name=name,rating=rating,email=email,phone=phone,desc=desc,date=datetime.today())
+        contact.save()
+        messages.success(request, "YOUR FEEDBACK HAS BEEN SENT.")
+    return redirect(reverse('about') + '#contact')
 
 def register_view(request):
     if request.method == "POST":
@@ -116,21 +140,70 @@ def register_view(request):
 
 
 @csrf_exempt
-@require_http_methods(['POST'])
 def checkout(request):
-    data = request.body
-    cart_items = json.loads(data)
+    if request.method == 'POST':
+        cart_data = json.loads(request.body)  # Get the cart data from the request
 
-    for item in cart_items:
-        cart = Cart(
-            name=item['name'],
-            description='',  # You may want to add a description field to your cart items
-            price=item['price']
-        )
-        cart.save()
+        if not request.user.is_authenticated:
+            return JsonResponse({'success': False, 'message': 'User not authenticated'}, status=401)
 
-    messages.success(request, 'Checkout Completed Successfully !') 
+        # Create a new Order for the user
+        order = Order.objects.create(user=request.user)
 
-    return  JsonResponse({'success': True, 'message': 'Checkout completed successfully'})
+        # Loop through each item in the cart data and create a CartItem for it
+        for item in cart_data:
+            CartItem.objects.create(
+                order=order,
+                name=item['name'],
+                price=item['price'],
+                quantity=item['quantity']
+            )
 
-   
+        # Clear the user's cart after successful checkout
+        Cart.objects.filter(user=request.user).delete()
+
+        return JsonResponse({'success': True, 'message': 'Checkout completed successfully', 'order_id': order.id})
+
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
+# @require_http_methods(['POST'])
+# def checkout(request):
+#     data = request.body
+#     cart_items = json.loads(data)
+
+#     for item in cart_items:
+#         cart = Cart(
+#             name=item['name'],
+#             description='',  # You may want to add a description field to your cart items
+#             price=item['price']
+#         )
+#         cart.save()
+
+#     messages.success(request, 'Checkout Completed Successfully !') 
+
+#     return  JsonResponse({'success': True, 'message': 'Checkout completed successfully'})
+
+def load_user_cart(request):
+    if request.user.is_authenticated:
+        user_cart_items = Cart.objects.filter(user=request.user)
+        print(user_cart_items) 
+        # Include the 'id' in the cart items returned to the front end
+        cart = [{"fixed_id": item.fixed_id, "name": item.name, "price": item.price, "quantity": item.quantity} for item in user_cart_items]
+        return JsonResponse({"cart": cart})
+    else:
+        return JsonResponse({"cart": []})
+
+
+@csrf_exempt
+def remove_item(request, fixed_id):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            try:
+                # Remove the item from the user's cart by product ID
+                cart_item = Cart.objects.get(user=request.user, fixed_id=fixed_id)
+                cart_item.delete()  # Delete the cart item
+                return JsonResponse({'success': True, 'message': 'Item removed from cart.'})
+            except Cart.DoesNotExist:
+                return JsonResponse({'success': False, 'message': 'Item not found.'}, status=404)
+        else:
+            return JsonResponse({'success': False, 'message': 'User not authenticated.'}, status=401)
+    return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)

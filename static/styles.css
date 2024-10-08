@@ -541,6 +541,7 @@ section{
 /* about */
 .about{
   background: url(blackwall.jpg);
+  background-size: cover;
 }
 
 .about .row{

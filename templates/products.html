@@ -83,7 +83,7 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <button class="btn btn-primary add" data-name="PS 5 Pro Version" data-price="57999">ADD</button>
+                <button class="btn btn-primary add" data-name="PS 5 Pro Version" data-price="57999" data-fixed-id="1">ADD</button>
                 <i class="fas fa-heart"  id="Icon"></i>
                 <a href="{% url 'item_detail' %}?name=PS-5%20Pro%20Version"><i class="fas fa-eye" id="Icon"></i></a>
             </div>
@@ -817,6 +817,8 @@
 
     
 
+    
+
     <div class="credit">created by <span> @GameHeaven </span> all rights reserved!</div>
 
 </section>
@@ -826,27 +828,60 @@
 <script>
    
     // Function to add items to localStorage as the cart
-    function addToCart(item) {
+    function addToCart(itemle) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let existingItem = cart.find(cartItem => cartItem.name === item.name);
+        let existingItem = cart.find(cartItem => cartItem.fixed_id === itemle.fixed_id);  // Find by item ID
 
+    
         if (existingItem) {
             existingItem.quantity++;
         } else {
-            cart.push(item);
+            cart.push(itemle);
         }
-
+    
         localStorage.setItem('cart', JSON.stringify(cart));
-        alert(`${item.name} has been added to your cart!`);
+        alert(`${itemle.name} has been added to your cart!`);
+    
+        // Send the item to the backend to add to the Cart model
+        fetch(`/add/${itemle.fixed_id}/`, {  // Ensure you have the correct URL for adding
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'  // Ensure the CSRF token is set correctly
+            },
+            body: JSON.stringify({ quantity: itemle.quantity })  // Send the quantity
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();  // Parse the JSON response
+            }
+            throw new Error('Network response was not ok.');  // Handle errors
+        })
+        .then(data => {
+            console.log('Item added to cart:', data);  // Log the response from the server
+            // You can also update the cart display here if needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('Error adding item to cart. Please try again.');
+        });
     }
-
+    
     // Event listener to "Add to Cart" buttons
     document.querySelectorAll('.add').forEach(button => {
         button.addEventListener('click', function() {
             const itemName = this.getAttribute('data-name');
             const itemPrice = this.getAttribute('data-price');
-            const item = { name: itemName, price: itemPrice, quantity: 1 };
-            addToCart(item);
+            const itemFixedId = this.getAttribute('data-fixed-id');  // Get product ID from button attributes
+    
+            const itemle = { 
+                name: itemName, 
+                price: itemPrice, 
+                fixed_id: itemFixedId, // Include ID in the item object
+                quantity: 1 
+            };
+    
+            addToCart(itemle);
         });
     });
 

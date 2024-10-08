@@ -22,5 +22,10 @@ urlpatterns = [
     path('homeret/',views.homeret,name="homeret"),
     path('search/',views.search,name="search"),
     path('item-detail/', views.item_detail, name='item_detail'),
+    path('load_user_cart/', views.load_user_cart, name='load_user_cart'),
+    path('cart/', views.my_cart, name='cart_view'),
+    path('remove_item/<int:fixed_id>/', views.remove_item, name='remove_item'),
+    
+
 
 ]
