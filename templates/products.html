@@ -38,9 +38,12 @@
         </nav>
     
         <div class="icons">
-            <a href="{% url 'mycart' %}" title="Cart">
-                <div id="cart-btn" class="fas fa-shopping-basket"></div>
-            </a>
+            <div class="dropdown">
+                <a  class="dropbtn"><div id="cart-btn" class="fas fa-shopping-basket"></div><i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="{% url 'mycart' %}" >My Cart    <i class="fas fa-shopping-basket"></i> </a>
+                    <a href="{% url 'view_orders' %}">My Orders    <i class="fas fa-shopping-cart"></i></a>
+                </div>
             <a href="{% url 'logout' %}" title="Logout">
                 <div id="login-btn" class="fas fa-sign-out-alt"></div>
             </a>

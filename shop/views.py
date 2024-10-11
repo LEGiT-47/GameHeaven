@@ -207,3 +207,40 @@ def remove_item(request, fixed_id):
         else:
             return JsonResponse({'success': False, 'message': 'User not authenticated.'}, status=401)
     return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)
+
+
+from django.shortcuts import render
+from shop.models import Order, CartItem  # Import the Order and CartItem models
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def view_orders(request):
+    # Retrieve all orders for the logged-in user, ordered by descending ID (latest first)
+    orders = Order.objects.filter(user=request.user).order_by('-id')
+
+    # Prepare a list of orders with dynamic order numbers
+    order_list = []
+    total_orders = orders.count()
+    grand_total = 0  # Initialize grand total
+
+    for index, order in enumerate(orders):
+        # Calculate the order number dynamically, where the latest order is number 1
+        order_number = total_orders - index
+        order_items = CartItem.objects.filter(order=order)  # Get items in this order
+
+        # Calculate the total price for items in this order
+        order_total = sum(item.price * item.quantity for item in order_items)
+
+        # Add order total to grand total
+        grand_total += order_total
+
+        order_list.append({
+            'order_id': order.id,           # Unique ID (incrementing value)
+            'order_number': order_number,    # Dynamic order number (1, 2, 3, ...)
+            'order_date': order.created_at,  # Order date
+            'items': order_items,            # The items in this order
+            'order_total': order_total       # Total for this order
+        })
+
+    # Pass the grand total to the template
+    return render(request, 'view_orders.html', {'orders': order_list, 'grand_total': grand_total})

@@ -17,3 +17,7 @@ def star_filter(rating):
         else:
             stars.append('empty')  # Empty star
     return stars
+
+@register.filter
+def multiply(value1, value2):
+    return value1 * value2
