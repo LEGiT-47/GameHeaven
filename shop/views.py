@@ -101,17 +101,6 @@ def logoutUser(request):
     return redirect("login") 
 
 
-# def contact(request):
-#     if request.method == "POST":
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             # Automatically save the data to the model, including the rating
-#             contact = form.save(commit=False)
-#             contact.date = now()
-#             contact.save()
-#             messages.success(request, "Your message has been sent.")
-#     return redirect("about") 
-
 def contact(request):
     if request.method == "POST":
         name=request.POST.get('name')
@@ -165,22 +154,7 @@ def checkout(request):
         return JsonResponse({'success': True, 'message': 'Checkout completed successfully', 'order_id': order.id})
 
     return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
-# @require_http_methods(['POST'])
-# def checkout(request):
-#     data = request.body
-#     cart_items = json.loads(data)
 
-#     for item in cart_items:
-#         cart = Cart(
-#             name=item['name'],
-#             description='',  # You may want to add a description field to your cart items
-#             price=item['price']
-#         )
-#         cart.save()
-
-#     messages.success(request, 'Checkout Completed Successfully !') 
-
-#     return  JsonResponse({'success': True, 'message': 'Checkout completed successfully'})
 
 def load_user_cart(request):
     if request.user.is_authenticated:
