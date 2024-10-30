@@ -516,7 +516,7 @@ section{
 .product .box-container .box .content .fa-heart,
 .product .box-container .box .content .fa-eye{
   text-align: center;
-  height: 4.5rem;
+  height: 45px;
   width: 4.5rem;
   line-height: 4.5rem;
   border-radius: .5rem;
@@ -645,7 +645,48 @@ section{
   font-size: 1.3rem;
   color: #F9E400;
 }
+/* Styling for the review wrapper */
+.review-wrapper {
+  position: relative;
+  padding: 0 60px; /* Space on each side for buttons */
+  max-width: 100%; /* Ensures it doesn't exceed its parent width */
+}
 
+/* Style for navigation buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background-color:#87A2FF;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Position the buttons inside the review-wrapper */
+.swiper-button-prev {
+  left: 20px;
+}
+
+.swiper-button-next {
+  right: 20px;
+}
+
+/* Adjust button placement on smaller screens */
+@media (max-width: 768px) {
+  .review-wrapper {
+      padding: 0 20px; /* Reduce padding on smaller screens */
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+      padding: 0.5rem;
+      font-size: 1.5rem;
+  }
+}
 /* end */
 
 /* contact */
