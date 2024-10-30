@@ -80,7 +80,11 @@ function loadCart() {
         cartTableBody.innerHTML += `
             <tr>
                 <td>${itemle.name}</td>
-                <td>${itemle.quantity}</td>
+                 <td>
+                    <button class="btn btn-secondary btn-sm" style="background-color: #8c52ff; border-color: #8c52ff;" onclick="changeQuantity(${index}, -1, ${itemle.fixed_id})">-</button>
+<span>${itemle.quantity}</span>
+<button class="btn btn-secondary btn-sm" style="background-color: #8c52ff; border-color: #8c52ff;" onclick="changeQuantity(${index}, 1, ${itemle.fixed_id})">+</button>
+                </td>
                 <td>₹${itemle.price}</td>
                 <td>₹${total}</td>
                 
@@ -163,22 +167,48 @@ document.getElementById('checkoutButton').addEventListener('click', function() {
  function userIsLoggedIn() {
     return document.querySelector('#user-logged-in').dataset.username !== undefined;
 }
-{% comment %}
-// Clear the cart when the user logs out, but not when the page is refreshed
-window.addEventListener('load', function () {
-    // Check if the user was logged in previously using session storage
-    let wasLoggedIn = sessionStorage.getItem('wasLoggedIn') === 'true';
+function changeQuantity(index, change, fixed_id) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart[index].quantity += change;
 
-    if (userIsLoggedIn()) {
-        // If the user is logged in now, store their status in sessionStorage
-        sessionStorage.setItem('wasLoggedIn', 'true');
-        loadCartForUser();  // Fetch user-specific cart from server
-    } else if (wasLoggedIn) {
-        // If the user was logged in previously but is now logged out, clear the cart
-        localStorage.removeItem('cart');
-        sessionStorage.setItem('wasLoggedIn', 'false');  // Update login status in sessionStorage
+    // Check if the quantity is less than 1
+    if (cart[index].quantity < 1) {
+        alert('The Item Was Removed !');
+        removeFromCart(index, fixed_id);  // Remove the item if quantity is less than 1
+    } else {
+        // Update the localStorage and reload the cart display
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();  // Reload cart after changing quantity
+
+        // Send the updated quantity to the backend
+        fetch(`/update_quantity/${fixed_id}/`, {  // Ensure the URL matches the Django URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is passed
+            },
+            body: JSON.stringify({ quantity: cart[index].quantity })  // Send new quantity
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                console.log('Quantity updated in backend:', data);
+            } else {
+                console.error('Failed to update quantity in backend:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+            alert('Error updating item quantity. Please try again.');
+        });
     }
-}); {% endcomment %}
+}
+
 
 // Load the cart specific to the logged-in user
 document.addEventListener('DOMContentLoaded', function() {

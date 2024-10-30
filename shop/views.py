@@ -244,3 +244,31 @@ def view_orders(request):
 
     # Pass the grand total to the template
     return render(request, 'view_orders.html', {'orders': order_list, 'grand_total': grand_total})
+@csrf_exempt  # Only use if CSRF token passing doesn't work; otherwise, include CSRF protection.
+def update_quantity(request, product_id):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)  # Read the JSON data
+            new_quantity = data.get('quantity')  # Get the new quantity
+
+            # Ensure the product and quantity are valid
+            if new_quantity is None or new_quantity <= 0:
+                return JsonResponse({'success': False, 'message': 'Invalid quantity'}, status=400)
+
+            user = request.user  # Get the logged-in user
+            product = get_object_or_404(Product, id=product_id)
+
+            # Retrieve the cart item for the user and product
+            try:
+                cart_item = Cart.objects.get(user=user, product=product)
+                cart_item.quantity = new_quantity  # Update quantity
+                cart_item.save()
+
+                return JsonResponse({'success': True, 'message': 'Quantity updated in the database'})
+            except Cart.DoesNotExist:
+                return JsonResponse({'success': False, 'message': 'Item not found in cart'}, status=404)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False, 'message': 'Invalid JSON data'}, status=400)
+
+    return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=400)
