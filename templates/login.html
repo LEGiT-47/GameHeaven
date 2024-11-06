@@ -42,6 +42,13 @@
   {% comment %} <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p> {% endcomment %}
 </form>
 </main>
+{% if messages %}
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
+{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 

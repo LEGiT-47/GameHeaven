@@ -18,12 +18,12 @@
             <div class="dropdown">
                 <a href="{% url 'products' %}" class="dropbtn">Products<i class="fas fa-chevron-down"></i></a>
                 <div class="dropdown-content">
-                    <a href="#ps_consoles" class="active">PS Consoles</a>
-                    <a href="#xbox_consoles">XBOX Consoles</a>
-                    <a href="#nintendo">Nintendo Switches</a>
-                    <a href="#gamepads">Gamepads</a>
-                    <a href="#keyboards">Keyboards</a>
-                    <a href="#headphones">Headphones</a>
+                    <a href="{% url 'products' %}#ps_consoles" class="active">PS Consoles</a>
+                    <a href="{% url 'products' %}#xbox_consoles">XBOX Consoles</a>
+                    <a href="{% url 'products' %}#nintendo">Nintendo Switches</a>
+                    <a href="{% url 'products' %}#gamepads">Gamepads</a>
+                    <a href="{% url 'products' %}#keyboards">Keyboards</a>
+                    <a href="{% url 'products' %}#headphones">Headphones</a>
                 </div>
             </div>
             <a href="{% url 'about' %}">About</a>

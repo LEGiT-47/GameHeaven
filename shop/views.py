@@ -11,6 +11,9 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .forms import ContactForm
 from django.urls import reverse
+from django.shortcuts import render
+from shop.models import Order, CartItem  # Import the Order and CartItem models
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     if request.user.is_anonymous:
@@ -23,9 +26,13 @@ def homeret():
      return redirect("home")
 
 def about(request):
+     if request.user.is_anonymous:
+          return redirect('login')
      return render(request, 'about.html')
 
 def search(request):
+     if request.user.is_anonymous:
+          return redirect('login')
      return render(request,'serach_res.html')
 
 def products(request):
@@ -43,6 +50,8 @@ def item_detail(request):
     return render(request, 'itemdes.html',context)
 
 def mycart(request):
+    if request.user.is_anonymous:
+          return redirect('login')
     return render(request, 'mycart.html')
 
 def my_cart(request):
@@ -183,9 +192,6 @@ def remove_item(request, fixed_id):
     return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)
 
 
-from django.shortcuts import render
-from shop.models import Order, CartItem  # Import the Order and CartItem models
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def view_orders(request):
