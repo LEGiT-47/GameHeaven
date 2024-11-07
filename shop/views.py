@@ -225,6 +225,7 @@ def view_orders(request):
     # Pass the grand total to the template
     return render(request, 'view_orders.html', {'orders': order_list, 'grand_total': grand_total})
 
+
 @csrf_exempt  # Only use if CSRF token passing doesn't work; otherwise, include CSRF protection.
 def update_quantity(request, product_id):
     if request.method == 'POST':
