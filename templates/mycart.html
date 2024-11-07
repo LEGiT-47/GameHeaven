@@ -80,10 +80,10 @@ function loadCart() {
         cartTableBody.innerHTML += `
             <tr>
                 <td>${itemle.name}</td>
-                 <td>
+                <td>
                     <button class="btn btn-secondary btn-sm" style="background-color: #8c52ff; border-color: #8c52ff;" onclick="changeQuantity(${index}, -1, ${itemle.fixed_id})">-</button>
-<span>${itemle.quantity}</span>
-<button class="btn btn-secondary btn-sm" style="background-color: #8c52ff; border-color: #8c52ff;" onclick="changeQuantity(${index}, 1, ${itemle.fixed_id})">+</button>
+                    <span>${itemle.quantity}</span>
+                    <button class="btn btn-secondary btn-sm" style="background-color: #8c52ff; border-color: #8c52ff;" onclick="changeQuantity(${index}, 1, ${itemle.fixed_id})">+</button>
                 </td>
                 <td>₹${itemle.price}</td>
                 <td>₹${total}</td>
