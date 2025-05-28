@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-zjh67t&tcm&u4_34l0ecxfwmr*7-ltqk8j!fb!w8i-@dgn34iv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','grocerygenie.com']
+ALLOWED_HOSTS = ['127.0.0.1','https://gamingshop.onrender.com', 'gamingshop.onrender.com']
 
 
 # Application definition
