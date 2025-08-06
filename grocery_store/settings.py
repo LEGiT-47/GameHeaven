@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-zjh67t&tcm&u4_34l0ecxfwmr*7-ltqk8j!fb!w8i-@dgn34iv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','https://gamingshop.onrender.com', 'gamingshop.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','https://gamingshop.onrender.com', 'gamingshop.onrender.com','*']
 
 
 # Application definition
@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'grocery_store.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -96,9 +96,9 @@ WSGI_APPLICATION = 'grocery_store.wsgi.application'
 #         'PORT' : '5432',
 #     }
 # }
-DATABASES = {
-    'default': dj_database_url.parse(config('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
